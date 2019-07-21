@@ -1,0 +1,65 @@
+#
+# 对html网页文本信息进行分析，提取有用信息
+# 正则，爬虫
+#
+#利用re模块，提取html网页文本内容
+import re
+html_text="<tr><td>Hello world</td></tr>"
+#获取<tr></tr>之间的内容
+res='<tr>(.*?)</tr>'
+str=re.findall(res,html_text)
+#获取<td></td>之间的内容
+html_text="<tr><td>Lilei</td><td>Lucy</td></tr>"
+res='<td>(.*?)</td>'
+str=re.findall(res,html_text)
+#获取google,duck
+html_text="<a href="http://www.google.com">google</a><a href="http://www.duckduckgo.com">duck</a>"
+res='<a .*?>(.*?)</a>'
+str=re.findall(res,html_text)
+#获取http://www.google.com,http://www.duckduckgo.com
+res='<a href="(.*?)">'
+str=re.findall(res,html_text)
+
+#提取网址里面的文本i4.com
+text="http://www.baidu.com/i1/i2/i3/i4.com"
+values=text.split('/')
+value=values[-1]
+#提取网址里面的参数a,1,b,2
+html_text="http://www.baidu.com/test.php?a=1&b=2"
+#提取a=1&b=2
+values=html_text.split('?')[-1]
+#提取a,1,b,2
+for key in values.split('&'):
+    key.split('=')
+
+
+#-------抓取网页上面的链接----------
+import urllib.request
+url="http://python.org"
+response=urllib.request.urlopen(url)
+buff=response.read()
+html=buff.decode('utf-8')
+#html type is str,buff type is bytes
+type(html)
+type(buff)
+response.close()
+print(html)
+#if use buff to call re.findall,it is wrong.
+urls=re.findall('<a.*?href=.*?<\/a>',html)
+for url in urls:
+   print(url)
+
+
+
+
+
+
+#reference
+#https://www.cnblogs.com/LouisZJ/p/8692474.html
+#https://www.jianshu.com/p/7e6236528e0c
+#https://www.cnblogs.com/mmbbflyer/p/6340375.html
+#https://github.com/python
+#https://www.cnblogs.com/LouisZJ/p/8716065.html
+
+
+
