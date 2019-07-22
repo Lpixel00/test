@@ -1,0 +1,212 @@
+#
+# python 基础语法练习
+#
+#----------------------------------#
+x=input()
+x
+x=int(input())
+x
+
+#----------------------------------#
+#if use str here,it will be wrong to the next str.
+#str(i) cannot work.
+str="hello"
+
+l=[1,2,3]
+for i in l:
+   i=str(i)
+
+l
+print(','.join(l))
+
+#-----------------------------------#
+l=['1','2','3']
+','.join(l)
+print(','.join(l))
+
+
+#----------------------------------#
+m1=[]
+f1=[1,2,3]
+for value n f1:
+   m1.append(str(value))
+
+#-----------------------------------#
+#--------------新建字典{i:i*i}------ #
+n=int(input())
+d=dict()
+for i in range(1,n+1):
+    d[i]=i*i
+    
+#---------------------------------------#
+#--------列表和元组---------------------#
+# []列表 append
+# ()元组 没有append
+# {}字典 没有append
+
+values=input()
+#1,2,3,4
+l=values.split(',')
+l
+t=tuple(l)
+
+
+#-------------------定义类-----------------#
+class className(object):
+     def __init__(self):
+        self.s=""
+     def func_name(self):
+        self.s=input()
+     def func_name2(self):
+        print(self.s.upper())
+        
+#use class
+strObj=className()
+strObj.func_name()
+strObj.func_name2()
+
+     
+#------------# 
+round(1)
+round(1.1)
+round(1.4)
+round(1.5)
+round(1.9)
+
+#-----------------------------------------------#
+#items 是一个列表，x是列表里面的元素，input()是控制台输入
+# input().split(',')是元素的集合
+items=[x for x in input().split(',')]
+print(','.join(items))
+
+
+#------------构造二维矩阵-----------------------------------#
+input_str=input()
+dimensions=[int(x) for x in input_str.split(',')]
+rowNum=dimensions[0]
+colNum=dimensions[1]
+#初始化为0
+multilist=[[0 for col in range(colNum)]for row in range(rowNum)]
+for i in range(rowNum):
+   for j in range(colNum):
+       multilist[i][j]=i*j
+       
+     
+    
+#----------------------------#
+
+items=[x for x in input().split(',')]
+items.sort()
+print(','.join(items))
+
+#-----输入多行，然后转大写字母，输入回车，结束---------#
+lines=[]
+while True:
+   s=input()
+   if s:
+     lines.append(s.upper())
+   else:
+     break
+
+for sentence in lines:
+   print(sentence)
+
+
+
+#-----------------------------------#
+a=[1,2,3,1,2,4]
+#列表转集合
+set(a)
+#集合转列表
+b=list(set(a))
+#列表排序
+sorted(b)
+#格式化列表显示
+"" .join(b)
+
+#---------------二进制数据----------------------#
+int('1',2)
+int('10',2)
+int('1001',2)
+
+
+#------------------------------------------------#
+value = []
+items=[x for x in raw_input().split(',')]
+for p in items:
+    intp = int(p, 2)
+    if not intp%5:
+        value.append(p)
+
+print ','.join(value)
+
+
+#--------------数字转字符串，字符转数字--------------------------------------------------------#
+num=123
+str_num=str(num)
+int(str_num[0])
+
+
+#----------分类统计----------------#
+
+d={"A类":0,"B类":0}
+
+dict={"DIGIT":0,"LETTERS":0}
+s=input()
+for c in s:
+   if c.isdigit():
+      dict["DIGIT"]+=1
+   elif c.isalpha():
+      dict["LETTERS"]+=1
+   else:
+      pass
+
+dict
+
+#--------------------------#
+
+s="zifuchuan123"
+for c in s:
+   c.isdigit()
+   c.isalpha()
+   c.islower()
+   c.isupper()
+
+
+#--------------------#
+a=3
+n1=int("%s%s" % (a,a))
+n2=int("%s%s%s" % (a,a,a))
+
+#----------------------#
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+     
+
+
+    
+    
+   
