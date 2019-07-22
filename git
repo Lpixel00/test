@@ -1,5 +1,44 @@
 
-
+下载git命令行工具
 https://gitforwindows.org/
+
+
+https://blog.csdn.net/xc_zhou/article/details/80637759
+
+#-------------------------------------------------------#
+git init
+Initialized empty Git repository in C:/Users/Administrator/.git/
+
+you can see C:/Users/Administrator/.git
+
+git commit
+please tell me who you are
+
+
+git config --global user.email ""
+git config --global user.name ""
+
+ssh-keygen -t rsa -C "your_email@youremail.com"
+在文件夹下面生成了.ssh
+
+打开浏览器，输入
+https://github.com/settings/keys
+
+添加pub
+
+$ ssh -T git@github.com
+The authenticity of host 'github.com (13.229.188.59)' can't be established.
+RSA key fingerprint is SHA256:nThbg6kXUpJWGl7E1IGOCspRomTxdCARLviKw6E5SY8.
+Are you sure you want to continue connecting (yes/no)? yes
+Warning: Permanently added 'github.com,13.229.188.59' (RSA) to the list of known hosts.
+Hi Lpixel00! You've successfully authenticated, but GitHub does not provide shell access.
+
+
+
+
+
+reference:
+https://baijiahao.baidu.com/s?id=1621585587557268777&wfr=spider&for=pc
+https://www.cnblogs.com/crazytata/p/10083716.html
 
 
