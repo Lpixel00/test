@@ -35,10 +35,62 @@ Hi Lpixel00! You've successfully authenticated, but GitHub does not provide shel
 
 
 
+--------------------------------------------------------
+git clone "url"
+
+git remote add origin "url"
+git pull origin master
+
+git init
+//产生一个.git文件夹，里面有4个文件夹，3个文件
+//产生一个local rep
+
+git status
+git add file
+
+git add -a 
+
+git commit -m "说明为什么添加文件"
+
+git commit -a -m "说明为什么添加文件,-a表示多个文件"
+
+git push origin master
+//推送到服务器,master分支
+
+branch分支
+git branch branchName
+git checkout branchName
+//切换到branchName分支
+
+切换到master,然后merge
+git checkout master
+git merge branchName
+
+把branchName merge到master
+
+切换到branchName
+git push origin branchName
+切换到master
+git push origin master
+
+revert back 回滚操作
+git checkout master
+新建sky.txt
+git add sky.txt
+git commit -m "add sky"
+修改
+git commit -m "update..."
+
+git log
+查找commit hash ，前面8个数字,按shift+q退出
+
+回滚到版本
+git checkout hashvalue filename
 
 
 reference:
 https://baijiahao.baidu.com/s?id=1621585587557268777&wfr=spider&for=pc
 https://www.cnblogs.com/crazytata/p/10083716.html
+www.edureka.co/devops
 
 
