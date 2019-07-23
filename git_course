@@ -1,0 +1,859 @@
+#---------------------------------------------------------------#
+edureka!
+
+hey everyone this is Rachel from eddy edureka and today's tutorial we're going to learn about git and github now
+if you're somenoe who's new to coding you might be hearing your fellow developers talking about git and github but
+you don't know what they actually are and you have never used it then this tutorial my friend is just for you and 
+even if you are one of those people who have been using git and github for a while but you're a little doubtful that
+there might be some kind of get features that you have left unexplored then I'll just tell you just hang in there till
+the end of this tutorial and please let me know if you have learned something new so I would like to welcome and thank all
+the attendees for joining today's session but before I begin am i audible  to everyone so john says yes so without 
+any further ado let us begin this tutorial by looking at the topics that we'll be learning  today 
+
+-------------------------------------------------------------
+ppt:
+version control -what & why
+version control tools
+github & git
+case study:Dominion enterprises
+git features
+git operations & commands
+--------------------------------------------------------------
+
+
+first we'll see what is version control and why do we actually need version control
+after that we'll take a look at the different version control tools and then we'll see all
+about github and git will also take an account a case of study of the dominant enterprises
+about how they're using github after that we'll take a look at the features of git and 
+finally we're going to use all the git commands to perform all the git operations so 
+this is exactly what we'll be learning today so is the agenda clear to everyone so john
+says yes Tyler says yes so we're good to go let us begin with the first topic 
+
+what is version control?
+
+you can think of a version control as the management system that manages the changes that you make
+in your project till the end 
+the changes that you make might be some kind of adding some new files
+or you're modifying the older files by changing the source code for something 
+so what the version control system does is that every time you make a change in your project it
+creates a snapshot of your entire project and save it and these snapshots are
+actually known as different versions
+now if you have trouble with the word snapshot just consider that snapshot is actually the entire state of 
+your project at a particular time it means that will contain what kinds of files your project is storing
+at that time and what kind of changes you have made so this is what a particular version contains
+now if you see the example here let's say that I have been developing my own website so let's say that
+in the beginning I just 
+
+my understanding of snapshot
+----------------------------------------------------------------------------
+time  files                changed detail
+00:08  a.txt               create a.txt
+00:09   a.txt b.txt        modify a.txt and create b.txt
+00:10   a.txt b.txt c.txt  modify a.txt and modify b.txt and create c.txt
+-----------------------------------------------------------------------------
+
+
+I just had only one webpage which is called the index.html and after a few days I have added another
+web page to it which is called about.html and I have made some modifications in the about.html
+by adding some kind of pictures and some kind of text so let's see what actually the version control system
+stores to see that it has detected that something has been modified and something has been created for 
+example it is storing that about.html is created and some kind of photo is created or added into it 
+and let's say that after a few days I have changed the entire page layout of the about.html page so
+again with version control system will detect some kind of change and will say that some about.html
+has been modified and you can consider all of this three snapshots as different versions so when I only
+have my index.html web page and I do not have anything else this is my version 1
+and after that when I added another web page this is going version 2 and after have changed the page layout
+of my web page this is my version 3 so this is how a version control system stores different versions
+so I hope that you've all understood what is a version control system and what are versions so if you have any
+kind of doubts you might ask me and if not give me quick confirmation on the chat window 
+sometimes you make changes and you don't want them so a version control system
+always keeps your older versions neat packed inside it only because if at anytime
+sometimes you want to roll back to the previous version you can do that that is the whole prupose
+
+
+you can find different versions ,previous versions ,this is the purpose.
+----------------------------------------------------------------------------
+version 1
+version 2
+version 3
+version 4
+----------------------------------------------------------------------------
+so let's move on to the next topic
+and now we'll see why do we actually need version control because you might thinking
+that why should I need a version control I know what the changes that
+I have made and maybe I'm making this change just because I'm correcting my project or something but
+there are a number of things because of why we need version control and so let us
+take a look at them one by one.
+
+so the first thing that version control system availeth is collaboration.
+now imagine that there are three developers working on a particular project and everyone is working in isolation or even
+if they're working in the same shared folder so there might be conflicts sometimes when each one of them are
+trying to modify the same file now let's say they are working in isolation everyone is minding their own business
+now the developer one has made some changes x y z in a particular application and in the same application
+the developer two has made some kind of other changes a b c and they are continuing doing that same thing
+they are making the same modifications through the same file but they're doing it differently so at the end 
+when you try to collaborate or when you try to merge all of their work together you come up with a lot of conflicts
+and you might not know who have done what kind of changes and this will at the end end up in chaos but
+with version control system it provides you with a shared workspace and it continuously tessl you who has made what kind of
+change or what has been changed so you'll always get notified if someone has made change in your project
+so with version control system a collaboration is a page between all the developers and you can visualize everyone's work properly
+and as a result your project will always evolve as a whole from the start and it will save a lot of time for you
+because there won't be much conflicts because obviously ...
+
+-------------------------------------------------
+before :
+developers
+A      task1
+B      task2
+C      task3
+after:
+developers
+A  
+B---------------task1+task2+task3
+C
+
+
+-------------------------------------------------
+
+move on to the next reason for why we need version control system
+the next reason is because of storing versions because saving a version of your project after you have 
+made changes is very essential and without a version control system it can actualy get confusing because
+there might be some kind of questions that will arrive in your mind when you are trying to save
+a version the first question might be how much would you save would you save the entire project
+or would it just save the changes that you made now if you only save the changes it will
+be very hard for you to review the whole project at a time
+and if you try to save the entire project every time there will be a huge amount of unnecessary and redundant
+data lying around because you'll be saving the same thing that has been remaining unchanged again and again
+I will over up a lot of your face and after that the another problem comes that how do you actually name these versions
+now even you are a very organized person and you might actually come up with a very comprehensible naming schema but
+as soon as your project starts varying and it comes to variants there is a pretty good chance that you'll actually lose
+track of naming them and finally the most important question is that how do you know what exactly is 
+different between these versions now you ask me that ok what's the difference between version 1 and 2 what exactly
+was changed you need to remember or document them as well now when you have a version control system you don't
+have to worry about any of that,how much to save,how to name,what's different between versions because
+the vcs( equal to version control system) always acknowledges that there is only one project so when
+you are working on your project there is only one version on your disk and everything 
+else all the changes that you've made in the past are all neatly packed inside the vcs and obviously like john
+asked that if you want to go back to the previous version if you're not sure that the modifications you've just
+made are right and you want to revert back you can do that with vcs as well because it is storing all your versions and 
+you can always revert  back so i hope that this is clear to everyone shall i proceed further,guys ok.
+
+
+---------------------------------------------------------
+your project
+
+---------------------------------------------------------
+let's go ahead and see the next reason now vcs provide me with a backup now
+
+local copies
+
+every time they start coding at the start of the day they actually fetch
+all the project files from the central server and store it in the local machine
+and after they are done working they actually transfer all the files back into the central 
+server so at every time you will always have a local copy in your local machine
+at times of crisis like maybe let's say that your central server gets 
+crashed and you have lost all your project files you donnot have to worry about that
+because all the developers are maintaining a local copy the same exact copy of all
+the files that is related to your project that is present in the central service is thre in your local machine
+and even if maybe this developer has not updated his local copy with all the files if he losses
+and the centeral server gets and the developer has not maintained a circle copy is always going to someone
+who has already updated it because obviously there is going to be huge number of collaborators working
+on the project so even a particular developer can communicate with other developers and get 
+fetch all the project files from other developers hope you copy as well so it's very reliable when you
+have a vcs because you are always going to have a backup of all your files so i hope this is clear to everyone.
+
+the next thing in which version control system helps us  is to analyze my project 
+because when you have finished your projects you want to know that
+how your project has actually evolved. so you can make an analysis of it and you can know that
+what you have done better or what could have been improved in your project 
+so you need some kind of data to make an analysis and you 
+want to know that what is exactly changed and when was it changed and how much time
+did it take and version control system actually provde you with all the information because
+every time you change something vcs provide you with the proper description of what was changed
+and when was it changed you can also see then entire timeline and you can make your analysis report in a
+very easy way because you have got all the data present here so this is how a vcs helps
+you to analyze your projects as well .
+
+move ahead
+version control tools
+what is available what kind of tools can i use to incorporate version control system.
+
+git
+svn(apache subversion)
+cvs
+mercurial
+
+google trends
+so many people use git
+
+move ahead
+learn about git and github 
+
+
+what is repository
+you can think of it as a data space ,stores your project files
+
+                            Distributed version control syste
+                                         Server
+                                     --------------
+                                    | Repository  |                  GitHub:server
+                                    ----------------
+                                    /|\        |
+                                     |push     |pull
+                                     |         |
+                                     |         |
+                                     |        \|/
+                                    --------------
+                                    | Repository  |                   git:create local repository
+                                    ---------------
+                                     |commit   |update
+                                     |         |
+                                     |         |
+                                     |        \|/
+                                    --------------
+                                    |  working copy|                   pc
+                                    ---------------  
+                                         PC
+                                   
+git and github
+git is a version control tool that will allow you to perform all these kind of operations to fetch data
+from central server and to just push all your local files to the central server.
+this is what git will allow you to do ,is just a version control management tool.
+
+whereas
+in github it is a code hosting platform for version control collaboration so github
+is just a company that allows you to host your central repository in a remote server
+if you want me to explain in easy words you can consider github as a social network
+whis is very much similar to facebook,share code
+
+
+how connect pc and github?
+
+you have to add an origin ,SSH ,HTTP
+
+move ahead
+github case study:dominion enterprises.
+
+reason for using GitHub as the solution:
+share code,work together
+
+move ahead
+what is git?
+git is a distributed version control tool and it supports distributed nonlinear workflow
+provide you to create a local repository in your local machine(command:git init)
+help you to accesss the remote repository to fetch files from there or push files into that
+
+
+features of git
+
+1 distributd
+everyone has a local copy (git clone)
+
+2,compatible(与其他的系统，很融洽)
+if you use svn,you can use git to svn repository(git svn)
+
+3,non-linear
+tree graph
+
+4,branching
+now branching actually allows you to make a nonlinear software
+development and this is a good feature that actually make git stand apart from nearly every other tool.
+git is the only one which has a branching model
+git encouranges you to have a multiple local branches and all of them are independent of each other
+and the creation,merging,deletion of all these branches actually takes only a few seconds.
+master branch means the main branch which starts from the start of your project to the end of your project
+and it will always contain the production quality code it will always contain the entire project
+
+5,lightweight
+压缩
+
+6，speed
+faster than others
+,written in c and c is not like other languages,it is close to machine language.
+so it reduce all the runtime overheads and it makes all the processing very fast.
+so git is small,fast
+
+7,open source
+
+created by Linus Torvalds
+he is the famous man who created the Linux kernel
+
+you can get it for free.
+
+8,reliable
+
+9,secure
+git is actually very secure now git uses the sha1 do name and identify objects
+so whenever you actually make change it actually creates a commit object
+and after you have made changes and you have commited to those changes it is actually very hard to go back
+and change it without other people knowking it because whenever you make it commit the sha-1 actually
+converts it.
+
+10,economical
+for free
+
+go ahead
+
+what is a repository?
+Local repository:(your PC)
+located on your machine
+.git folder inside 
+only admin of the machine can work with this repo
+
+Central repository:(GitHub)
+located on remote server
+for team to share
+
+
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+git operations and command
+
+
+git init  
+create repository
+
+git add
+git commit
+git status
+
+make changes
+
+add origin
+push
+pull
+
+syncing repositories
+
+1,a github account
+2,create repository on github
+
+3,install git on my PC
+4,create a working folder
+5,right-click,choose git bash here
+6,git init
+ remote repository ,name origin
+ git remote add origin ,so that we can pull files from our github or central repository
+ in order to fetch files ,git pull
+ git push
+ 
+ 
+ git init
+ clear
+ git remote add origin ""  (green button link)
+ git pull origin master
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+references:
+www.edureka.com/devops
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
