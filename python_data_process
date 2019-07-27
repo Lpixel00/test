@@ -1,0 +1,94 @@
+
+1,读取excel里面的数据。
+#导入xlrd
+#打开excel文件工作薄
+#获取对应的sheet表格
+#获取表格的行数，列数
+#按行，列读取
+
+import os
+import xlrd
+xlrd.Book.encoding="utf-8"
+str="输入要打开的excel文件完整路径"
+print(str)
+filename=input()
+判断文件是否存在
+if os.path.exists(filename):
+         data=xlrd.open_workbook(filename)#data就是xlrd.book.Book对象
+else:
+         print('文件不存在')
+         
+table=data.sheets()[i] #i就是第i个sheet
+nrows=table.nrows#表格行数
+ncols=table.ncols#表格列数
+
+table.row_values(i)[j]#第i行第j列的内容,记住一个是括号，一个是中括号。
+
+2,数据写到excel文件。
+#导入xlwt
+#新建工作薄
+#新建sheet表格
+#写入表格
+#保存为excel文件
+
+import xlwt
+book=xlwt.Workbook(encoding="utf-8",style_compression=0)
+sheet1=book.add_sheet('sheetName',cell_overwrite_ok=True)
+sheet1.write(i,j,数据) #数据写入第i行第j列
+filename="D:\\a.xls"
+book.save(filename)#取一个文件名，保存。
+
+3，写入csv,csv是逗号分割的文件
+#导入csv
+#准备数据
+#按行写入
+
+import csv
+data=[('lilei',24),('lucy',25)]
+with open(filename,'w') as writeintocsv:
+    csv_writer=csv.writer(writeintocsv)
+    for i in data:
+      csv_writer.writerow(i)
+结果：
+打开filename查看文件，果然存在。
+
+4，读取csv文件
+#导入csv
+#打开，读取
+#按行读取
+
+import csv
+reader=csv.reader(open(filename))
+result=[]
+for item in reader:
+   print(item)
+   result.append(item)
+   
+filename.csv
+lilei,24
+
+lucy,23
+
+
+
+结果
+[['lilei', '24'], [], ['lucy', '23'], []]
+
+ref:
+https://jingyan.baidu.com/article/851fbc37729bf33e1f15aba2.html
+
+
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
