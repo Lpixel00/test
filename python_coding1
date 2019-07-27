@@ -1,0 +1,290 @@
+
+import and from import
+import 模块名
+import random
+randint(1,3)  错
+random.randint(1,3)对
+random.sample({1,3,5,4},2)对
+
+from 模块名 import 模块里面的函数名
+from random import randint
+randing(1,3)对
+sample({1,3,6},2)错
+from random import *
+sample({1,3,5},2)对
+randing(1,3)对
+
+
+
+
+------------------------------
+
+|-root
+   |-a.py
+   |-b.py
+   |-C
+     |-d.py
+     |-E
+       |-F
+         |-g.py
+
+
+file a.py
+import b
+
+file b.py
+from C.d import *
+
+file d.py
+from E.F.g import *
+
+g.py
+empty file
+
+execute error:
+
+Traceback (most recent call last):
+  File "D:\python_of_import\a.py", line 3, in <module>
+    import b
+  File "D:\python_of_import\b.py", line 1, in <module>
+    from C.d import *
+  File "D:\python_of_import\C\d.py", line 1, in <module>
+    from E.F.g import *
+ModuleNotFoundError: No module named 'E'
+（因为所有的import都是从根节点开始，项目开始位置，是一个根节点，比如root。C是根节点root下面，E不是根节点root下面，所以要把C添加到sys.path,然后E在C下面，所以才能找到E）
+
+after update file a.py
+import sys
+sys.path.append('root\C')
+import b
+
+run ok!
+
+-------sys-----------
+import sys
+sys.path
+
+
+sys.modules
+#字典
+sys.modules.keys()
+sys.modules.values()
+sys.modules['os']
+将模块名称映射到已加载的模块，Python一启动，它将被加载在内存中。 
+当我们导入新modules，sys.modules将自动记录下该module；当第二次再导入该module时，Python将直接到字典中查找，加快运行速度。
+
+locals()
+#字典
+globals()
+#字典
+
+模块内置属性
+file a.py
+print(__file__)
+#打印a.py的绝对路径
+print(__name__)
+#打印出__main__
+
+
+-----os------
+os.path.dirname('D:\a\b')
+#结果是D:
+#获取文件夹
+str2=os.path.abspath('D:\\a\\b')
+#显示结果D:\\a\\b
+
+
+所有的模块的import都是从“根节点“开始
+所以要添加到sys.path里面,成为”根节点“，才能处处运行。
+否则，会出现模块找不到的错误。
+如何让程序处处运行呢？
+添加代码
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))#存放.py所在的绝对路径
+
+sys.path.append(BASE_DIR)
+
+比如
+os.path.dirname('D:\\a\\b\\c.py')
+就是把D:\\a\\b添加到sys里面。
+这样才正确。
+如果D:\\a\\b不在sys里面
+或者D:\\a\\b不是程序开始运行的目录
+就会出错。
+
+
+import module
+if(module is in sys.modules)
+  true:
+        将module名字假如当前py文件的local命名空间
+        执行完毕
+  false:从sys.path目录中，根据module名字查找py文件，将模块载入内存，加到sys.modules里面，将module名字导入到当前py文件的Local命名空间
+        执行完毕
+        
+        
+        
+    
+--------------------
+模块：一般是一个以py为后缀的文件，比如a.py
+里面有函数，类，变量
+
+来源：
+标准库，比如import os,sys
+第三方，比如安装的cv ,先用pip install opencv-python 然后用import cv2
+自己写的
+
+包：是一个文件夹，里面有a.py,b.py文件
+
+文件夹home
+a.py b.py c.py
+文件夹school
+a.py b.py c.py
+
+包的作用：在不同的包里面，可以有相同名字的py文件，避免了模块名的冲突。
+
+包里面有一个特别的文件__init__.py
+
+
+file __init__.py
+__all__=['a.py','b.py']
+
+
+外面调用
+from home import *
+#调用home包里面的模块，模块有哪些？就是__init__.py文件里面的__all__定义的。
+#批量导入包里面的模块
+
+
+
+-----名空间----
+file mingkongjian.py
+def func(a=1):
+    b=2
+    print(locals())
+    return a+b
+
+print(func())
+glos=globals()
+glos['d']=41
+print(d)
+
+print(globals())
+
+结果
+{'b':2,'a':1}  这是执行了locals(),显示了函数内部的变量a,b
+3              这是调用函数func()，打印结果3
+41              这是定义了全局的d为4
+
+{'__name__': '__main__', '__doc__': None, '__package__': None, '__loader__': <_f
+rozen_importlib_external.SourceFileLoader object at 0x0000000001DB1E80>, '__spec
+__': None, '__annotations__': {}, '__builtins__': <module 'builtins' (built-in)>
+, '__file__': 'D:\\python_of_import\\a.py', '__cached__': None, 'sys': <module '
+sys' (built-in)>, 'b': <module 'b' from 'D:\\python_of_import\\b.py'>, 'func': <
+function func at 0x0000000001CE1EA0>, 'glos': {...}, 'd': 41}
+
+这是globals()，显示的是字典，是关于模块的信息。
+locals()记录函数的变量
+globals()记录模块的变量
+
+
+
+
+ref:
+https://blog.csdn.net/weixin_38256474/article/details/81228492
+
+
+
+
+------utf-8-------
+如果使用了中文，就会发生错误
+test.py
+print('中文，你好')
+
+SyntaxError: Non-UTF-8 code starting with '\xd6' in file D:\python_of_import\tes
+t.py on line 1, but no encoding declared; see http://python.org/dev/peps/pep-026
+3/ for details
+
+test.py
+#-*- coding:utf-8 -*-
+print('中文，你好')
+
+SyntaxError: (unicode error) 'utf-8' codec can't decode byte 0xd6 in position 0:
+ invalid continuation byte
+ 
+ 
+ (使用cmd窗口的时候，如何复制窗口上面的信息，点击鼠标右键，然后选择标记，然后用鼠标选择好要复制的内容，然后按enter，记住，不是ctrl+c,然后
+ 粘贴就好了)
+ 
+console 模式：
+
+str1='hello'
+print(str1)
+str2=str1.encode('utf-8')
+print(str2)
+type(str2)
+str1.decode('utf-8')#字符串不能decode
+str2.decode('utf-8')#得到'hello'
+结果
+hello
+b'hello'
+<class 'bytes'>
+
+str3='朋友' #用中文
+str4=str3.encode('utf-8')
+print(str4)
+结果
+b'\xe6\x9c\x8b\xe5\x8f\x8b'
+str5=str4.decode('utf-8')
+print(str5)
+结果
+朋友
+type(str4)
+<class 'bytes'>
+type(str5)
+<class 'string'>
+
+string ---encode('utf-8')---->bytes----decode('utf-8')------>string
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
