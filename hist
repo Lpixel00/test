@@ -1,0 +1,494 @@
+
+#直方图
+
+#given a list of numbers
+#统计每个元素，出现了几次。
+#比如，某个店里，从周围来了很多的客人，统计每个客人来了几次。
+#一天内不同时间点，客人出现的情况统计：{张三(9点)，李四(8点)，张三(10点)，李四(7点)，张三(11点)，王二(2点)}
+#所以一天内{张三：3次，李四：2次，王二：2次}
+
+用编号表示客人，
+张三：3号
+李四：4号
+李浩：1号
+王：0号
+平：5号
+对编号做统计，
+然后编号映射回客人，就知道客人的情况了。
+
+客人->编号->客人
+客人转编号，做运算。
+编号转客人，查看运算结果。
+
+
+a=(3,4,1,1,0,5)
+hist={}
+for i in a: #i表示a的元素，比如i=3,i=4
+  hist[i]=hist.get(i,0)+1 #统计i出现了几次
+print(hist)
+结果
+{3:1,4:1,1:2,0:1,5:1}
+
+
+现在写一个函数,输入一列数字，输出一个字典，字典统计了每个项目出现次数。
+
+input:a list of numbers (n1,n2,...)
+output: {n1:count_of_n1,n2:count_of_n2,...}
+
+def count_elements(seq) ->dict:
+    """count """
+    hist={}
+    for item in seq:
+      hist[item]=hist.get(item,0)+1
+    return hist
+    
+b=(2,3,2)
+counted=count_elements(b)
+print(counted)
+{2:2,3:1}
+
+
+
+good news,发现不需要自己来写这么多的代码，用少量代码可以解决。
+if you know about collections
+
+from collections import Counter
+c=(8,7,7,7,2)
+Counter(c)
+#返回一个字典，根据字典的value从高到低排列
+Counter({7:3,8:1,2:1})
+
+
+验证字典是否一样
+a={8:3,7:2}
+b={8:3,7:2}
+c={8:3,7:1}
+a.items()==b.items()
+True
+a.items()==c.items()
+False
+
+
+dict1={3:1,14:2,5:3,6:2}
+result=sorted(dict1)
+根据字典的key排序，从小到大[3,5,6,14]
+print(result)
+结果
+[3 5 6 14]
+
+#counted是一个字典
+#sorted(counted)是得到字典的key，从小到大排序
+#k就是字典里面的key
+#打印每一个key,并且打印对应的value，也就是个数乘以'+'，表示key对应的value个'+'
+#格式化 
+#格式{0},{1}表示要接受参数的位置，第0个位置，第1个位置，后面的参数，就放在这里。表示占位置的符号
+#格式{0:5d}
+#表示第0个位置和最左边，相距5个单位
+#格式{0:3d}{1:7d}
+#表示第0个位置和最左边距离3个单位，第1个位置和第0个位置，距离7个单位
+#{0}  {1}中间2个空格
+#表示第1个位置和第0个位置，中间有2个空格
+
+>>> i=1
+>>> print('{0:10d}'.format(i))
+         1
+>>> print('{0}{1}'.format(i,i))
+11
+>>> print('{0:3d}{1:7d}'.format(i,i))
+  1      1
+
+
+
+
+
+>>> counted
+{3: 1, 14: 2, 5: 3, 6: 2}
+>>> for k in sorted(counted):
+...      print('{0:5d} {1} '.format(k,'+' * counted[k]))
+...
+    3 +
+    5 +++
+    6 ++
+   14 ++
+
+
+
+
+
+-----------------------------
+给定一列数[1 2 3]
+然后随机的复制次数,比如1复制3次，2复制2次，3复制1次
+[1 1 1 2 2 3]
+#[v]*f
+#v表示值，f表示该值出现的次数
+v=1
+f=3
+data=[]
+data.extend([v]*f)
+结果
+[1 1 1]
+
+#zip操作是一种点对点的映射
+#x=[1,2,3]
+#y=[4,5,6]
+1->4
+2->5
+3->6
+
+x=[1,2,3]#1,2,3之间必须是逗号，不能空格，否则语法错误
+y=[4,5,6]
+for i,j in zip(x,y):
+  print(i,j)
+结果：
+1 4
+2 5
+3 6
+
+randint(1,3)
+产生1到3之间的，包括1和3的整数。
+
+
+
+values=[1 ,2, 3]
+freq=(random.randint(1,3) for _ in values)
+data=[]
+for f,v in zip(freq,values):
+    data.extend([v]*f)
+结果
+[1 ,2, 2, 2, 3, 3, 3 ]
+    
+    
+------------------直方图：用来估计概率密度函数的------------------
+#分箱子
+#统计
+#画图
+
+分箱： 有3个箱子，A，B，C
+外面有人投票，
+如果是100元，投到C箱子
+如果是50元，投到B箱子
+如果是10元，投到A箱子
+最后，A箱子有10张，B箱子有20张，C箱子有70张
+总共有10+20+70=100张
+A箱子占10%
+B箱子占20%
+C箱子占70%
+
+高度设置为0-100
+A箱子高度：100*10%=10
+B箱子高度：100*20%=20
+C箱子高度：100*70%=70
+
+
+-
+-
+-
+-                ————————
+-
+-
+-
+-
+-       ——————————
+-———————
+|---A---|--B-----|--C----|
+    
+
+同样，如果有3个箱子，A，B，C，有很多写了数字的卡片，
+如果一张卡片上的数字在0-10，那么就放在A箱子
+如果一张卡片上的数字是10-20，那么就放B箱子
+如果一张卡片上的数字是20-30，那么就放C箱子
+
+
+-               
+-
+-
+-      ———————
+-             ————————
+-——————
+-
+|------|------|------|
+0      10    20    30
+
+开闭区间，A箱子0到10，但是不包括10，10放在B箱子
+
+
+
+
+
+#产生很多的样本
+#这些样本的来历：是符合某个分布的数据集。
+
+import numpy as np
+np.random.seed(444)
+np.set_printoptions(precision=3)#小数点后面3个数字
+d=np.random.laplace(loc=15,scale=3,size=500)#产生一个数据集，这个数据集的特点是符合拉普拉斯分布，有500个数字
+len(d)
+d[:5]
+#前5个数字
+
+
+>>> samples=np.array([1,2,3,1,2,3,1,2,3,1,2,3,1,2,3])
+>>> len(samples)
+15
+>>> hist,bin_edges=np.histogram(samples)
+>>> hist
+array([5, 0, 0, 0, 0, 5, 0, 0, 0, 5], dtype=int64)
+>>> hist.sum()
+15
+>>> bin_edges
+array([1. , 1.2, 1.4, 1.6, 1.8, 2. , 2.2, 2.4, 2.6, 2.8, 3. ])
+
+
+hist.size  10
+bin_edges.size 11
+
+写着数字的卡片：1,2,3,1,2,3,1,2,3,1,2,3,1,2,3
+10个箱子，
+然后把卡片按照箱子投递。
+每个箱子都写了接受什么范围的数字。
+
+
+                      
+
++                         +                  +    
++                         +                  +  
++                         +                  +
++                         +                  +  
++                         +                  +
+1  1.2  1.4  1.6  1.8  2.0  2.2  2.4  2.6  2.8  3
+10个箱子
+
+视觉看上去：是平的。
+
+
+分箱是如何实现的呢？
+#得到数据范围，从最小，到最大
+#分成几份
+#平均分开
+
+a=np.array([1,2,3,4])
+first_edge,last_edge=a.min(),a.max()
+n_equal_bins=10#分成10份
+bin_edges=np.linspace(start=first_edge,stop=last_edge,num=n_equal_bins+1,endpoint=True)
+print(bin_edges)
+
+结果
+[1,1.3]     箱子1
+[1.3,1.6]   箱子2
+[1.6,1.9]   箱子3
+[1.9,2.2]   箱子4
+[2.2,2.5]   箱子5
+[2.5,2.8]   箱子6
+[2.8,3.1]   箱子7
+[3.1,3.4]   箱子8
+[3.4,3.7]   箱子9
+[3.7,4]     箱子10
+
+
+>>> s1=np.array([1,2])
+>>> s2=np.array([2,3])
+>>> np.array_equal(s1,s2)
+False
+>>> s3=np.array([1,2])
+>>> np.array_equal(s1,s3)
+True
+
+去掉数组里面重复的数字
+>>> a3=np.array([1,2,1,3,1])
+>>> np.unique(a3)
+array([1, 2, 3])
+
+
+-------------------------------------
+#numpy的操作
+np.ceil()
+1.4  ->2
+1.6  ->2
+
+
+------------------------------------
+
+
+-------------------plt 操作------------------------
+plt.xlabel('Value')
+plt.ylabel('Frequency')
+plt.title('My Very Own Histogram')
+plt.text(23, 45, r'$\mu=15, b=3$')#位置坐标, \mu显示出来就是希腊字母mu
+要显示文本，必须是用这样的格式r'$ 字符串 $'
+plt.grid(axis='y', alpha=0.75) 画横线
+plt.grid(axis='x',alpha=0.75)  画垂直线
+plt.show() #显示图形
+ 
+             title
+ylabel
+|
+|            text
+|
+|
+|————————————————————————————————
+          xlabel
+
+
+
+刻度
+
+---------------------------------------------------------------
+
+
+>>> b1=4
+>>> y=10*10 if b1 %2 else b1+10
+>>> y
+14
+>>> b1=5
+>>> y=10*10 if b1 %2 else b1+10
+>>> y
+100
+
+
+---------------产生1000个平均分布的数据---------------
+
+np.set_printoptions(precision=3)
+#小数点后面3个数字
+data=[]
+for i in range(1000):
+   data.append(random.uniform(1,100))
+   
+data1=np.array(data)
+
+#产生了1000个数字
+#画出这1000个数字的直方图，看看这1000个数字之间的规律
+#这1000个数字的直方图符合平均分布。
+
+n       ->频数
+bins    ->箱子
+patches ->矩形状的直方图，看上去像小柱子
+
+n,bins,patches=plt.hist(x=data1,bins='auto',color='#0504aa',alpha=0.7,rwidth=0.85)
+
+for i in patches:
+  print(i)
+  
+  
+plt.grid(axis='y',alpha=0.75)
+plt.xlabel('values')
+plt.ylabel('freq')
+plt.title('uniform ')
+plt.text(23,45,r'$a=1,b=100$')
+maxfreq=n.max()
+ylim(ymax=np.ceil(maxfreq/10)*10 if maxfreq%10 else maxfreq+10)
+plt.show()
+
+准备好数据，然后可以用这个操作，查看数据的分布情况。
+平平的，就是平均分布。
+
+
+
+------------------------数字操作---------------------------------------
+>>> x1=10
+>>> x2=11
+>>> y=np.ceil(x1/10)*10 if x1%10 else x1+10
+>>> y
+20
+>>> y=np.ceil(x2/10)*10 if x2%10 else x2+10
+>>> y
+20.0
+>>> x3=12
+>>> y=np.ceil(x3/10)*10 if x3%10 else x3+10
+>>> y
+20.0
+
+结果
+10 ->20
+11 ->20
+12 ->20
+13 ->20
+19 ->20
+如果数字可以整除10，那么就是返回数字加上10，
+如果数字不可以整除10，那么就扩展到个位为0，十位数字加1
+比如：
+13
+14
+15
+这些不可以整除10
+13 -->个位0,十位2,20
+14 -->个位0,十位2,20
+15 -->个位0，十位2,20
+
+目的就是产生10的倍数，使得可以整除10
+
+
+
+
+
+
+----********************----------------------
+平均值是中心点
+因为要么是在平均值的左边，要么是在他的右边
+方差是代表胖瘦的
+方差很大，代表很矮胖
+方差很小，代表很高瘦
+
+import pandas as pd
+means=10,20
+stdevs=2,4
+dist=pd.DataFrame(np.random.normal(loc=means,scale=stddevs,size=(1000,2)),columns=['a','b'])
+
+dist.agg(['min','max','mean','std']).round(decimals=2)
+agg的作用，就是对数据分析，统计出min,max,mean,std
+
+#1000行，2列
+数据来源：np.random.normal(loc,scale,size) 随机正态分布，均值，方差，个数
+dist.agg().round(decimals=2)小数点后面2个数字
+
+   a    |   b
+0
+1
+2
+.
+.
+.
+999
+
+可视化：
+
+
+
+fig, ax = plt.subplots()
+dist.plot.kde(ax=ax, legend=False, title='Histogram: A vs. B')
+dist.plot.hist(density=True, ax=ax)
+ax.set_ylabel('Probability')
+ax.grid(axis='y')
+ax.set_facecolor('#d8dcd6')
+
+
+#得到数据 np.random.normal(loc=,scale,size=)
+#然后对数据分析 data.agg(['min','max','mean','std'])
+#对数据可视化   data.plot.kde  data.plot.hist  
+-------------*--------------------------------
+
+
+numbers=1000
+shuju=[]
+for i in range(numbers):
+  shuju.append(random.uniform(1,50))
+data=np.array(shuju) 
+#data转DataFrame，然后分析数据，可视化数据
+dist=pd.DataFrame(data)
+data.agg(['min','max','mean','std'])
+
+平均分布：平平的，没有中心，没有明星，大家都一样。
+正态分布：有中心点，而且有胖瘦，胖瘦和方差有关系。均值，方差。
+
+
+-------------------------------------
+pandas good for data analyze
+
+ref:
+https://segmentfault.com/a/1190000015659597
+
+
+
+
+
+
+
