@@ -1,0 +1,42 @@
+﻿"""
+使用excel生成图像
+
+1,使用excel产生一些数字，范围是0-255之间的整数
+2，用python读取excel文件
+3，用python里面的数据结构列表list接收excel里面的数字
+4，用list初始化图像矩阵(能显示出来图像的矩阵np.uint8)
+5,保存矩阵为图像，存储在磁盘
+"""
+
+import cv2
+import numpy as np
+import xlrd
+#step 1 mat.xls has been created .
+
+#step 2
+
+data=xlrd.open_workbook('mat.xls')
+table=data.sheets()[0]
+nrows=table.nrows
+ncols=table.ncols
+
+#step 3
+
+list_of_mat=[]
+for i in range(nrows):
+  for j in range(ncols):
+    list_of_mat.append(table.row_values(i)[j])
+
+#step4
+
+img=np.array(list_of_mat,np.uint8)
+
+output=img.reshape(nrows,ncols)
+
+#step 5
+cv2.imwrite("saved_img.jpg",output)
+     
+
+
+
+
