@@ -13,6 +13,9 @@ import numpy as np
 import xlrd
 #step 1 mat.xls has been created .
 
+notice:如果xls文件里面存在空值，那么在list转img的时候，会出错。所以xls文件要好好检查。但是如果xls文件里面数字很多，人检查是很吃力的。
+从500个数字里面，挑出一个空值，you try it。
+
 #step 2
 
 data=xlrd.open_workbook('mat.xls')
